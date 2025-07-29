@@ -144,9 +144,6 @@ mingw*)
         have_win32="yes"
         lt_enable_auto_import="-Wl,--enable-auto-import"
         ;;
-linux*)
-        AC_DEFINE([HAVE_ABSTRACT_SOCKETS], 1, [Define if your platform supports abstract sockets])
-        ;;
 esac
 
 AC_SUBST(lt_enable_auto_import)
