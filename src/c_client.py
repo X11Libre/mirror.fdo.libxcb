@@ -1926,6 +1926,9 @@ def _c_accessors_list(self, field):
                     if f == field:
                         break
                     prev_field = f
+                # utilize the previous field and its number of elements to index past the end of the reply
+                # e.g. if the final field is uint8_t pad[2], generate &R->pad + 2
+                # e.g. if the final field is uint16_t len, generate &R->len + 1
                 _c('    return (%s *) (&R->%s + %d);', field.c_field_type, prev_field.c_field_name, prev_field.type.nmemb)
             else:
                 _c('    return (%s *) (R + 1);', field.c_field_type)
