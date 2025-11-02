@@ -1920,12 +1920,12 @@ def _c_accessors_list(self, field):
         if switch_obj is not None:
             _c('    return %s;', fields[field.c_field_name][0])
         elif field.prev_varsized_field is None:
-            prev_field = None
-            for f in R_obj.fields:
-                if f == field:
-                    break
-                prev_field = f
             if R_obj.is_reply:
+                prev_field = None
+                for f in R_obj.fields:
+                    if f == field:
+                        break
+                    prev_field = f
                 _c('    return (%s *) (&R->%s + %d);', field.c_field_type, prev_field.c_field_name, prev_field.type.nmemb)
             else:
                 _c('    return (%s *) (R + 1);', field.c_field_type)
