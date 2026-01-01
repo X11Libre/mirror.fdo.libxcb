@@ -344,8 +344,8 @@ static int _xcb_do_connect(int fd, const struct sockaddr* addr, int addrlen) {
     if(fd < 0)
         return -1;
 
-    setsockopt(fd, IPPROTO_TCP, TCP_NODELAY, &on, sizeof(on));
-    setsockopt(fd, SOL_SOCKET, SO_KEEPALIVE, &on, sizeof(on));
+    setsockopt(fd, IPPROTO_TCP, TCP_NODELAY, (const void *)&on, sizeof(on));
+    setsockopt(fd, SOL_SOCKET, SO_KEEPALIVE, (const void *)&on, sizeof(on));
 
     return connect(fd, addr, addrlen);
 }
